@@ -1,72 +1,40 @@
 #Emilio Mercado
 #CIS261 Guessing Game
 import random
-import sys
 
-number = 0
-numberGuessed = 0
-counter = 0
 
-def generate_number_to_be_guessed():
-    global number
-    number = random.randint(1, 100)
+def display_title():
+    print('Guess the number!')
+    print()
 
-def display_welcome_message():
-    print("Welcome to the Guess the Number Game")
-    print("+++++++++++++++++++++++++++++++++++++")
 
-def make_guess(guess_number):
-    global numberGuessed, counter
-    numberGuessed = guess_number
-    counter += 1
+def play_game(limit):
+    number = random.randit(1, limit)
+    print(f'I am thinking of a number from 1 to {limit}\n')
+    count = 1
+    guess = int(input('Your guess?: '))
 
-def is_correct_guess():
-    global numberGuessed, number
-    return numberGuessed == number
+    while guess != number:
+        if guess < number:
+            print('Too low')
+            count += 1
+        elif guess > number:
+            print('Too high')
+            count += 1
+        guess = int(input('Your guess?: '))
+    print(f'you guess it in {count} tries. \n')
 
-def display_correct_guess_message():
-    global counter
-    print(f"Great work! You gussed it in {counter} tries.")
-
-def display_please_guess_message():
-    print("I'm thinking of a number between 1 and 100:")
-    print("Try to guess it.")
-
-def display_guess_again_message():
-    global numberGuessed, number
-    difference = numberGuessed - number
-    if difference > 10:
-        print("Way too high! Guess again.")
-    elif difference <= 10 and difference > 0:
-        print("Too high! Guess again.")
-    elif difference < -10:
-        print("Way too low! Guess again.")
-    elif difference >= -10 and difference < 0:
-        print("Too low. Guess again.")
 
 def main():
-    global guessNumber
-    global counter
-    guessNumber = 0
-    play_again = "y"
-    display_welcome_message()
-    while play_again == "y":
-        generate_number_to_be_guessed()
-        display_please_guess_message()
-        while guessNumber != number:
-            print("Enter a number between 1 and 100: ")
-            guessNumber = int(input())
-            make_guess(guessNumber)
-            if is_correct_guess():
-                display_correct_guess_message()
-                counter = 0
-                break
-            else:
-                display_guess_again_message()
-        play_again = input("Try Again? (y/n) ").lower()
-        if play_again == "n":
-            print("Bye - Come back soon!")
-            sys.exit()
+    display_title()
+    again = 'yes'
+    while again.lower() == 'yes':
+        limit = int(input('Enter the limit: '))
+        play_game(limit)
+        again = input('Would you like to play again? Enter (yes/no)')
+        print()
+    print('Bye')
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()
