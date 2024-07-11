@@ -9,7 +9,7 @@ def display_title():
 
 
 def play_game(limit):
-    number = random.randit(1, limit)
+    number = random.randint(1, limit)
     print(f'I am thinking of a number from 1 to {limit}\n')
     count = 1
     guess = int(input('Your guess?: '))
